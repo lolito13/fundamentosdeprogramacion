@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <title>pierda,papel o tijera</title>
     <script>
+
         function aleatorio(min, max) {
             return Math.floor(Math.random() * (max - min + 1) +
                 min)
@@ -15,8 +16,8 @@
 
                 alert("elegiste 🪨")
             }
-            
-            //este es un comentario
+
+
             if (jugador == 2) {
 
                 alert("elegiste 🧻")
@@ -27,63 +28,101 @@
             }
         }
 
+        function validarEntradaUsuario(numeroElegido) {
+            if (numeroElegido >= 1 && numeroElegido <= 3) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
         // 1 es para piedra ,2 es para papel y 3 es para tijeras
         let jugador = 0
         let pc = 0
-        let triunfos =0
+        let triunfos = 0
         let perdidas = 0
-        while (triunfos > 3 && perdidas > 3){   
-            
-           pc = aleatorio(1, 3)
-                    jugador = prompt("elije: 1 para piedra , 2 para papel y 3 para tijeras")
-        //alert ("elegiste " + jugador)
-        if (jugador == 1) {
+        let juegoValido = false
 
-            alert("elegiste 🪨")
-        }
-        if (jugador == 2) {
-
-            alert("elegiste 🧻")
-        }
-        if (jugador == 3) {
-
-            alert("elegiste ✂️")
-        }
-        // COMBATE
-
-        if (pc == 1) {
-
-            alert("pc eligio 🪨")
-        }
-        if (pc == 2) {
-
-            alert("pc eligio 🧻")
-        }
-        if (pc == 3) {
-
-            alert("pc elegio ✂️")
+        function resetValores() {
+            let jugador = 0
+            let pc = 0
+            let triunfos = 0
+            let perdidas = 0
+            let juegoValido = false
 
         }
-        // COMBATE 
-        if (pc == jugador) {
-            alert("EMPATE")
 
-        } else if (jugador == 1 && pc == 3) {
-            alert("GANASTE")
-            
-        }
-        else if (jugador == 2 && pc == 1) {
-            alert("GANASTE")
-        }
-        else if (jugador == 3 && pc == 2) {
-            alert("GANASTE")
-        }
-        else {
-            alert("PERDISTE")
+
+        while (triunfos < 3 && perdidas < 3) {
+            jugador = prompt("elije: 1 para piedra , 2 para papel y 3 para tijeras")
+
+            juegoValido = validarEntradaUsuario(jugador)
+
+            // AQUI EMPIEZA EL JUEGO
+
+            // aqui evaluamos si el jugador puede efectivamente entrar al juego
+            if (juegoValido == true) {
+
+                pc = aleatorio(1, 3)
+
+                //validacion Usuario
+                if (jugador == 1) {
+
+                    alert("elegiste 🪨")
+                }
+                else if (jugador == 2) {
+
+                    alert("elegiste 🧻")
+                }
+                else if (jugador == 3) {
+
+                    alert("elegiste ✂️")
+                }
+
+                // Validacion PC
+                if (pc == 1) {
+
+                    alert("pc eligio 🪨")
+                }
+                else if (pc == 2) {
+
+                    alert("pc eligio 🧻")
+                }
+                else if (pc == 3) {
+
+                    alert("pc elegio ✂️")
+
+                }
+
+                // COMBATE 
+                if (pc == jugador) {
+                    alert("EMPATE")
+
+                } else if (jugador == 1 && pc == 3) {
+                    alert("GANASTE")
+                    triunfos = triunfos + 1
+                }
+                else if (jugador == 2 && pc == 1) {
+                    alert("GANASTE")
+                    triunfos = triunfos + 1
+                }
+                else if (jugador == 3 && pc == 2) {
+                    alert("GANASTE")
+                    triunfos = triunfos + 1
+                }
+                else {
+                    alert("PERDISTE")
+                    perdidas = perdidas + 1
+                }
+            }
+            else {
+                alert("Elegiste otra cosa, así no puedes jugar >-<")
+                resetValores()
+            }
         }
 
-        }
-       
+        alert("ganaste " + triunfos + " partida(s). Perdiste " + perdidas + " partida(s)")
 
     </script>
 
